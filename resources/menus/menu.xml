@@ -1,9 +1,0 @@
-<menu title="@Strings.MainMenuTitle" id="MainMenu">
-
-<menu-item id="Item1">@Strings.MenuLabel1</menu-item>
-
-<menu-item id="Item2">@Strings.MenuLabel2</menu-item>
-
-<menu-item id="Item3">@Strings.MenuLabel3</menu-item>
-
-</menu>
