@@ -1,2 +1,2 @@
-# Gamrmin-Discord-Webhook
-Garmin Discord Webhook
+# Gamrmin-Timeline-Widget
+Garmin Timeline Widget (v4)
