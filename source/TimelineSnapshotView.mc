@@ -35,7 +35,7 @@ class TimelineSnapshotView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>100,:locY=>150});
+    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>173,:locY=>50});
     //stefoscope = new WatchUi.Bitmap({:rezId=>Rez.Drawables.stefoscope,:locX=>100,:locY=>100});
     vehicle = new WatchUi.Bitmap({:rezId=>Rez.Drawables.vehicle,:locX=>100,:locY=>150});
     //sports = new WatchUi.Bitmap({:rezId=>Rez.Drawables.sports,:locX=>100,:locY=>100});
@@ -181,7 +181,7 @@ ts = Gregorian.moment(options);
         dc.drawText(snapw, snaph, Graphics.FONT_MEDIUM, next.substring(17, next.length()), Graphics.TEXT_JUSTIFY_CENTER);
          var camping = next.find("camping");
          //var medical = next.find("hospital") || next.find("appointment");
-         var car = next.find("serviced") || next.find("trip");
+         //var car = next.find("serviced") || next.find("trip")) != null);
          //var race = next.find("race") || next.find("run");
          //var sport = next.find("baseball") || next.find("football") || next.find("tournament");
          //var romance = next.find("wedding") || next.find("date") || next.find("anniversary");
@@ -194,9 +194,9 @@ ts = Gregorian.moment(options);
          //else if (medical != null) {
          //dc.draw(stefoscope);
          //}
-         else if (car != null) {
-         dc.draw(vehicle);
-         }
+         //else if (car != null) {
+         //dc.draw(vehicle);
+         //}
          //else if (race != null) {
          //dc.draw(flag);
          //}
