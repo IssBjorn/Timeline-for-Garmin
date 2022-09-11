@@ -11,6 +11,10 @@
 
 <bitmap filename="turtle.png" id="turtle"/>
 
+<bitmap filename="tent.png" id="tent"/>
+
+<bitmap filename="vehicle.png" id="vehicle"/>
+
 <drawable-list id="MenuForeground" background="Gfx.COLOR_TRANSPARENT"/>
 
 </drawables>
