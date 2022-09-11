@@ -6,11 +6,8 @@ var inputStr = "";
 var newStr = "";
 var typetoadd = "";
 var type = null;
-var remind = App.Storage.getValue("reminders");
-    var event = App.Storage.getValue("events"); 
-    var alarms = App.Storage.getValue("alarm");
-    var records = App.Storage.getValue("record"); 
-    var typeto = App.Storage.getValue("type");
+var pins = App.Storage.getValue("pins");
+var typeto = App.Storage.getValue("type");
 class TextPickerView extends Ui.View {
 
     // this is here for completeness but is likely calculated elsewhere in an app
