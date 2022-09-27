@@ -15,10 +15,14 @@ class TimelineAddDelegate extends WatchUi.BehaviorDelegate {
     }
 	
 	function onMenu(){
+	var hasMenu2=(WatchUi has :Menu2);
+	if(hasMenu2) {
 	    return pushImagesCustom();
 	    }
-	    
-
+	else {
+	System.println("nope");
+	}
+}
 
 
 //! Create the Images custom menu

@@ -215,6 +215,35 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
         }
         return false;
     }
+    
+    function onHold(clickEvent) {
+        var coord = clickEvent.getCoordinates();
+     
+    	var x = coord[0];
+    	var y = coord[1];
+    	
+        if(x > 60 && x < 180 && y > 0 && y < 60 && longPressTimer == null) {
+            longPressTimer = new Timer.Timer();
+           
+            longPressTimer.start( method(:onPreviousPage), LONG_PRESS_UPDATE_FREQUENCY, true );
+            return true;
+        } else if (x > 60 && x < 180 && y > 180 && y < 240 && longPressTimer == null) {
+            
+            longPressTimer = new Timer.Timer();
+            longPressTimer.start( method(:onNextPage), LONG_PRESS_UPDATE_FREQUENCY, true );
+            return true;
+        }
+        return false;
+    }
+    
+    function onRelease(clickEvent) {
+       if (longPressTimer != null) { 
+        longPressTimer.stop();
+            longPressTimer = null;
+            return true;
+        }
+        return false;
+    }
 
     function onKeyReleased(event) {
         var key = event.getKey();
@@ -225,6 +254,8 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
         }
         return false;
     }
+  
+
 
     function onSelect() {
     System.println(type);

@@ -12,6 +12,7 @@ var t3 = Application.Storage.getValue("t3");
 var ts = null;
 var read = null;
 var typetoread = null;
+var todisplay = Application.Storage.getValue("ttd");
 var dateTimeString = "";
 var next = Application.Storage.getValue("next");
 var repeat = null;
@@ -27,6 +28,10 @@ var vehicle = null;
 var sports = null;
 var heart = null;
 var beast = null;
+var ARCTOS = null;
+var CANINE = null;
+var WILY = null;
+var REPTILE = null;
 class TimelineSnapshotView extends WatchUi.View {
 
 
@@ -35,12 +40,16 @@ class TimelineSnapshotView extends WatchUi.View {
 
     function initialize() {
         View.initialize();
-    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>173,:locY=>50});
-    //stefoscope = new WatchUi.Bitmap({:rezId=>Rez.Drawables.stefoscope,:locX=>100,:locY=>100});
-    vehicle = new WatchUi.Bitmap({:rezId=>Rez.Drawables.vehicle,:locX=>100,:locY=>150});
-    //sports = new WatchUi.Bitmap({:rezId=>Rez.Drawables.sports,:locX=>100,:locY=>100});
-   // heart = new WatchUi.Bitmap({:rezId=>Rez.Drawables.heart,:locX=>100,:locY=>100});
-    //beast = new WatchUi.Bitmap({:rezId=>Rez.Drawables.beast,:locX=>100,:locY=>100});
+    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>70,:locY=>50});
+    stefoscope = new WatchUi.Bitmap({:rezId=>Rez.Drawables.stefoscope,:locX=>70,:locY=>50});
+    vehicle = new WatchUi.Bitmap({:rezId=>Rez.Drawables.vehicle,:locX=>70,:locY=>50});
+    sports = new WatchUi.Bitmap({:rezId=>Rez.Drawables.sports,:locX=>70,:locY=>50});
+   heart = new WatchUi.Bitmap({:rezId=>Rez.Drawables.heart,:locX=>70,:locY=>50});
+    beast = new WatchUi.Bitmap({:rezId=>Rez.Drawables.beast,:locX=>70,:locY=>50});
+    ARCTOS = new WatchUi.Bitmap({:rezId=>Rez.Drawables.bear,:locX=>70,:locY=>50});
+    CANINE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.dog,:locX=>70,:locY=>50});
+    WILY = new WatchUi.Bitmap({:rezId=>Rez.Drawables.fox,:locX=>70,:locY=>50});
+    REPTILE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.turtle,:locX=>70,:locY=>50});
     
     }
 
@@ -136,12 +145,13 @@ ts = Gregorian.moment(options);
       System.println("arr3:" + arr3);
       var number = currtime;
       var nex = null;
+      var ttd = null;
       var len2 = arr.size();
       System.println("len2:" + len2);
       curr = arr[0];
       System.println("curr: " + curr);
    if (arr3.size() > 1) {  
-    for(var j=0; j < (len2  - 1); j+=1) {
+    for(var j=0; j < (len2); j+=1) {
     System.println("j: " + j);
     var time1 = (number - arr[j]).abs();
     
@@ -152,12 +162,15 @@ ts = Gregorian.moment(options);
          if (time1 < time2) {
              curr = arr[j].abs();
             var string = arr2[j];
-            if (typetoread != null){
-             typetodisplay = arr3[j];}
+            typetodisplay = arr3[j];
+       
+             System.println(typetodisplay);
              System.println("curr: " + curr);
               
              nex = string;
+             ttd = typetodisplay;
              Application.Storage.setValue("next", nex);
+             Application.Storage.setValue("ttd", ttd);
              System.println("nex: " + nex);
              
              System.println("len:" + len);    
@@ -176,43 +189,54 @@ ts = Gregorian.moment(options);
            }}
         
         
-       
+       if (next != null){
        dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_TRANSPARENT);
-        dc.drawText(snapw, snaph, Graphics.FONT_MEDIUM, next.substring(17, next.length()), Graphics.TEXT_JUSTIFY_CENTER);
-         var camping = next.find("camping");
-         //var medical = next.find("hospital") || next.find("appointment");
-         //var car = next.find("serviced") || next.find("trip")) != null);
-         //var race = next.find("race") || next.find("run");
-         //var sport = next.find("baseball") || next.find("football") || next.find("tournament");
-         //var romance = next.find("wedding") || next.find("date") || next.find("anniversary");
-         //var animal = next.find("zoo") || next.find("farm") || next.find("vet");
-         
-         if (camping != null) {
-         System.println("yes!");
+        dc.drawText(snapw, snaph+30, Graphics.FONT_MEDIUM, next.substring(17, next.length()), Graphics.TEXT_JUSTIFY_CENTER);
+        
+        var yes = null;
+         if (next.find("camping") != null) {
+         System.println("disp: " + todisplay);
+         yes = "yes";
          tent.draw(dc);
          }
-         //else if (medical != null) {
-         //dc.draw(stefoscope);
-         //}
-         //else if (car != null) {
-         //dc.draw(vehicle);
-         //}
-         //else if (race != null) {
-         //dc.draw(flag);
-         //}
-         //else if (sport != null) {
-         //dc.draw(sports);
-         //}
-         //else if (romance != null) {
-         //dc.draw(heart);
-         //}
-         //else if (animal != null) {
-         //dc.draw(beast);
-         //}
-         else { dc.drawText(snapw, snaph, Graphics.FONT_SMALL, typetodisplay, Graphics.TEXT_JUSTIFY_CENTER);}
-         
-         
-         
+         if (next.find("hospital") != null || next.find("baby") != null || next.find("appointment") != null || next.find("meds") != null || next.find("medical") != null) {
+         yes = "yes";
+         stefoscope.draw(dc);
+         }
+         if (next.find("trip") != null || next.find("service") != null || next.find("garage") != null) {
+         yes = "yes";
+         vehicle.draw(dc);
+         }
+         if (next.find("race") != null || next.find("run") != null || next.find("cross country") != null) {
+         yes = "yes";
+         flag.draw(dc);
+         }
+         if (next.find("tournament") != null || next.find("sports") != null || next.find("the game") != null || next.find("baseball") != null) {
+         yes = "yes";
+         sports.draw(dc);
+         }
+         if (next.find("anniversary") != null || next.find("date night") != null || next.find("wedding") != null) {
+         yes = "yes";
+         heart.draw(dc);
+         }
+         if (next.find("zoo") != null || next.find("farm") != null || next.find("vet") != null) {
+         yes = "yes";
+         beast.draw(dc);
+         }
+          System.println(yes);
+         if (yes == null)
+         {
+         if (todisplay.find("reminder") !=null){
+         System.println("working");
+         ARCTOS.draw(dc);}
+         if (todisplay.find("timer") !=null){
+         CANINE.draw(dc);}
+         if (todisplay.find("event") !=null){
+         WILY.draw(dc);}
+         if (todisplay.find("record") !=null){
+         REPTILE.draw(dc);}
+         }
+         }
         
     
     
@@ -221,6 +245,7 @@ ts = Gregorian.moment(options);
 
 
            function onShow() {
+           Application.Storage.setValue("next",null);
               repeat = 0;
         if (type != null) {
     
