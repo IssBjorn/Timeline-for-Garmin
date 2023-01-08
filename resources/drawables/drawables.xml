@@ -1,19 +1,27 @@
 <drawables>
     <bitmap id="LauncherIcon" filename="launcher_icon.png" />
 
-<bitmap filename="bear.png" id="bear"/>
+<bitmap filename="bear.png" id="bear" compress="true"/>
 
-<bitmap filename="dog.png" id="dog"/>
+<bitmap filename="dog.png" id="dog" compress="true"/>
 
-<bitmap filename="fox.png" id="fox"/>
+<bitmap filename="fox.png" id="fox" compress="true"/>
 
-<bitmap filename="mouse.png" id="mouse"/>
+<bitmap filename="mouse.png" id="mouse" compress="true"/>
 
-<bitmap filename="turtle.png" id="turtle"/>
+<bitmap filename="turtle.png" id="turtle" compress="true"/>
 
-<bitmap filename="tent.png" id="tent"/>
+<bitmap filename="tent.png" id="tent" compress="true"/>
 
-<bitmap filename="vehicle.png" id="vehicle"/>
+<bitmap filename="vehicle.png" id="vehicle" compress="true"/>
+
+<bitmap filename="sports.png" id="sports" compress="true"/>
+
+<bitmap filename="heart.png" id="heart" compress="true"/>
+
+<bitmap filename="stefoscope.png" id="stefoscope" compress="true"/>
+
+<bitmap filename="beast.png" id="beast" compress="true"/>
 
 <drawable-list id="MenuForeground" background="Gfx.COLOR_TRANSPARENT"/>
 
