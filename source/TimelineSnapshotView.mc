@@ -32,25 +32,17 @@ var ARCTOS = null;
 var CANINE = null;
 var WILY = null;
 var REPTILE = null;
+var PictureTime = null;
+var yes = null;
+var nex = null;
 class TimelineSnapshotView extends WatchUi.View {
 
 
-
+var next = Application.Storage.getValue("next");
 
 
     function initialize() {
         View.initialize();
-    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>70,:locY=>50});
-    stefoscope = new WatchUi.Bitmap({:rezId=>Rez.Drawables.stefoscope,:locX=>70,:locY=>50});
-    vehicle = new WatchUi.Bitmap({:rezId=>Rez.Drawables.vehicle,:locX=>70,:locY=>50});
-    sports = new WatchUi.Bitmap({:rezId=>Rez.Drawables.sports,:locX=>70,:locY=>50});
-   heart = new WatchUi.Bitmap({:rezId=>Rez.Drawables.heart,:locX=>70,:locY=>50});
-    beast = new WatchUi.Bitmap({:rezId=>Rez.Drawables.beast,:locX=>70,:locY=>50});
-    ARCTOS = new WatchUi.Bitmap({:rezId=>Rez.Drawables.bear,:locX=>70,:locY=>50});
-    CANINE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.dog,:locX=>70,:locY=>50});
-    WILY = new WatchUi.Bitmap({:rezId=>Rez.Drawables.fox,:locX=>70,:locY=>50});
-    REPTILE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.turtle,:locX=>70,:locY=>50});
-    
     }
 
     // Load your resources here
@@ -66,6 +58,8 @@ class TimelineSnapshotView extends WatchUi.View {
     
     // Update the view
     function onUpdate(dc) {
+    System.println("pictime: " + PictureTime);
+    System.println("next: " + next);
     View.onUpdate(dc);
     dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_WHITE);
        dc.clear();
@@ -78,7 +72,7 @@ class TimelineSnapshotView extends WatchUi.View {
        
        var snaph = dc.getHeight()/2;
        var snapw = dc.getWidth()/2;
-       var next = Application.Storage.getValue("next");
+       
        var pinarray = Application.Storage.getValue("pins");
 
        var typetoread = Application.Storage.getValue("type");
@@ -93,7 +87,7 @@ class TimelineSnapshotView extends WatchUi.View {
        }
 
        
-       
+if (PictureTime != null) {       
  if(arr==null){arr = new [0];}
  if(arr2==null){arr2 = new [0];}
  if(arr3==null){arr3 = new [0];}
@@ -144,7 +138,7 @@ ts = Gregorian.moment(options);
 
       System.println("arr3:" + arr3);
       var number = currtime;
-      var nex = null;
+
       var ttd = null;
       var len2 = arr.size();
       System.println("len2:" + len2);
@@ -159,11 +153,11 @@ ts = Gregorian.moment(options);
     
     
     System.println("times: " + time1 + "," + time2);
-         if (time1 < time2) {
+         if (time1 < time2 || time1 == time2) {
              curr = arr[j].abs();
             var string = arr2[j];
             typetodisplay = arr3[j];
-       
+      
              System.println(typetodisplay);
              System.println("curr: " + curr);
               
@@ -192,8 +186,26 @@ ts = Gregorian.moment(options);
        if (next != null){
        dc.setColor(Graphics.COLOR_BLACK,Graphics.COLOR_TRANSPARENT);
         dc.drawText(snapw, snaph+30, Graphics.FONT_MEDIUM, next.substring(17, next.length()), Graphics.TEXT_JUSTIFY_CENTER);
-        
-        var yes = null;
+        if (next != null) {    
+    if (next.find("camping") != null){
+    tent = new WatchUi.Bitmap({:rezId=>Rez.Drawables.tent,:locX=>70,:locY=>50});}
+    if (next.find("hospital") != null || next.find("baby") != null || next.find("appointment") != null || next.find("meds") != null || next.find("medical") != null) {
+    stefoscope = new WatchUi.Bitmap({:rezId=>Rez.Drawables.stefoscope,:locX=>70,:locY=>50});}
+    if (next.find("trip") != null || next.find("service") != null || next.find("garage") != null) {
+    vehicle = new WatchUi.Bitmap({:rezId=>Rez.Drawables.vehicle,:locX=>70,:locY=>50});}
+    if (next.find("race") != null || next.find("run") != null || next.find("cross country") != null) {
+    sports = new WatchUi.Bitmap({:rezId=>Rez.Drawables.sports,:locX=>70,:locY=>50});}
+    if (next.find("anniversary") != null || next.find("date night") != null || next.find("wedding") != null) {
+    heart = new WatchUi.Bitmap({:rezId=>Rez.Drawables.heart,:locX=>70,:locY=>50});}
+    if (next.find("zoo") != null || next.find("farm") != null || next.find("vet") != null) {
+    beast = new WatchUi.Bitmap({:rezId=>Rez.Drawables.beast,:locX=>70,:locY=>50});}
+    if (yes == null){
+    ARCTOS = new WatchUi.Bitmap({:rezId=>Rez.Drawables.bear,:locX=>70,:locY=>50});
+    CANINE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.dog,:locX=>70,:locY=>50});
+    WILY = new WatchUi.Bitmap({:rezId=>Rez.Drawables.fox,:locX=>70,:locY=>50});
+    REPTILE = new WatchUi.Bitmap({:rezId=>Rez.Drawables.turtle,:locX=>70,:locY=>50});
+    }}
+         yes = null;
          if (next.find("camping") != null) {
          System.println("disp: " + todisplay);
          yes = "yes";
@@ -238,13 +250,16 @@ ts = Gregorian.moment(options);
          }
          }
         
-    
+    }
     
     
 }
 
 
            function onShow() {
+    Application.Storage.setValue("next", nex);
+           
+           
            Application.Storage.setValue("next",null);
               repeat = 0;
         if (type != null) {
@@ -266,7 +281,11 @@ ts = Gregorian.moment(options);
             
            }
            
+        PictureTime = "yes";   
+           }
            
+           function onHide() {
+           PictureTime = null;
            }
 
 

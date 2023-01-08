@@ -287,6 +287,7 @@ class TextPickerDelegate extends Ui.BehaviorDelegate {
     } 
 
     function onBack() {
+        PictureTime = null;
         Ui.popView(Ui.SLIDE_RIGHT);
         picker = null;
         return true;
