@@ -1,7 +1,8 @@
-using Toybox.Communications;
-using Toybox.Application;
-using Toybox.WatchUi;
-
+import Toybox.Communications;
+import Toybox.Application;
+import Toybox.Graphics;
+import Toybox.Lang;
+import Toybox.WatchUi;
 class TimelineSnapshotDelegate extends WatchUi.BehaviorDelegate {
     public var active = true;
 
@@ -10,12 +11,14 @@ class TimelineSnapshotDelegate extends WatchUi.BehaviorDelegate {
     }
 	
 	function onMenu(){
+	  
 	    WatchUi.pushView(new TimelineView(), new TimelineAddDelegate(), WatchUi.SLIDE_RIGHT);
+	    return true;
 	    }
 
     function onTap(clickEvent){
-      repeat = 0;
+     
         WatchUi.requestUpdate();
-        
+        return true;
         }
 }
